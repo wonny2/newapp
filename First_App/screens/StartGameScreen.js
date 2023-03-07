@@ -10,8 +10,14 @@ function StartGameScreen() {
         keyboardType="number-pad" // input에 숫자만 입력하도록 keyBoard 설정
         // autoCorrect={false}
       />
-      <PrimaryButton>Return</PrimaryButton>
-      <PrimaryButton>Confirm</PrimaryButton>
+      <View style={styles.buttonsContainer}>
+        <View style={styles.buttonContainer}>
+          <PrimaryButton>Return</PrimaryButton>
+        </View>
+        <View style={styles.buttonContainer}>
+          <PrimaryButton>Confirm</PrimaryButton>
+        </View>
+      </View>
     </View>
   );
 }
@@ -20,6 +26,8 @@ export default StartGameScreen;
 
 const styles = StyleSheet.create({
   inputContainer: {
+    justifyContent: "center",
+    alignItems: "center", // alignContents가 아니다! 조심!
     marginTop: 100,
     marginHorizontal: 24,
     padding: 16,
@@ -42,5 +50,11 @@ const styles = StyleSheet.create({
     marginVertical: 8, // margin 위,아래
     fontWeight: "bold",
     textAlign: "center",
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+  },
+  buttonContainer: {
+    flex: 1,
   },
 });
