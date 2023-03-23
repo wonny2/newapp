@@ -1,13 +1,31 @@
 import { StyleSheet, TextInput, View } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
+import { useState } from "react";
 
 function StartGameScreen() {
+  const [enteredNumber, setEnteredNumber] = useState("");
+
+  const numberInputHandler = (enteredText) => {
+    setEnteredNumber(enteredText);
+  };
+
+  const confirmInputHandler = () => {
+    // input에 들어온 값이 숫자인지, 1~99 숫자인지 확인하는 함수
+    if (!(enteredNumber >= 1 && enteredNumber <= 99)) {
+      alert("1~99 사이의 숫자를 입력해주세요");
+    }
+
+    return setEnteredNumber("");
+  };
+
   return (
     <View style={styles.inputContainer}>
       <TextInput
         style={styles.numberInput}
         maxLength={2}
         keyboardType="number-pad" // input에 숫자만 입력하도록 keyBoard 설정
+        onChangeText={numberInputHandler} // 키보드를 누를 때마다 = 값을 넣을 때마다 여기 함수가 작동한다.
+        value={enteredNumber}
         // autoCorrect={false}
       />
       <View style={styles.buttonsContainer}>
@@ -15,7 +33,7 @@ function StartGameScreen() {
           <PrimaryButton>Return</PrimaryButton>
         </View>
         <View style={styles.buttonContainer}>
-          <PrimaryButton>Confirm</PrimaryButton>
+          <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
         </View>
       </View>
     </View>
@@ -31,7 +49,7 @@ const styles = StyleSheet.create({
     marginTop: 100,
     marginHorizontal: 24,
     padding: 16,
-    backgroundColor: "#4e0329",
+    backgroundColor: "#3b021f",
     borderRadius: 8,
     elevation: 4,
     shadowColor: "black",
